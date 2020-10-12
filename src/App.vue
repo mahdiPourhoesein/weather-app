@@ -231,7 +231,7 @@ export default {
             var amPm = time.slice(6);
             this.amPm = amPm;
             this.currentTemp = Math.round(data.current.temp);
-            if(amPm == "pm"){
+            if(amPm == "pm" && 12 > this.time > 6){
                     this.yes = false ;
                     this.no = true ;
                 }else{
