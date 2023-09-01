@@ -1,0 +1,59 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+
+    <!-- <form method="post" enctype="multipart/form-data" action="/userServiceProviderEndpoint/upload/document">
+      <input type="file" />
+      <input type="text" name="userServiceProviderEndpointId">
+      <input type="submit"/>
+    </form> -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    
+    <script>
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoiYkBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJqYXZhZCIsImxhc3ROYW1lIjoiaGFkaW5lemhhZCIsImlhdCI6MTY5MjcyNDM2MCwiZXhwIjozMzkwNjMyNzE5fQ.NxYiT3hEXKWYbY134yalydR6-P9xZWaDkRbs2LZzqeg";
+      const socket= new io({
+        path:'/socket/socket',
+        transports: ["websocket"],
+        query: {token}
+      });
+      socket.on('connect',()=>{
+        console.log('connect')
+      })
+      socket.on('error',(error)=>{
+        console.log('error in connecton socket',error)
+      })
+      socket.on('disconnect',()=>{
+        console.log('error in connecton socket')
+      })
+      socket.on('feedback-from-ai',(msg)=>{
+        const {
+          ai_feedback,
+          servicename,
+          endpoint_name,
+        } = msg;
+        console.log('feedback-from-ai msg:',msg)
+      })
+      socket.on('custom-mapping',(msg)=>{
+        const {
+          success,
+          message,
+          servicename,
+          endpoint_name,
+          mapping_status
+        } = msg;
+        console.log('custom-mapping msg:',msg)
+      })
+      socket.on('ai-code-generated',(msg)=>{
+        const {
+          ai_codes,
+          servicename,
+          endpoint_name,
+        } = msg;
+        console.log('ai-code-generated msg:',msg)
+      })
+      console.log('hi')
+    </script>
+  </body>
+</html>
